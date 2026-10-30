@@ -86,6 +86,9 @@
     <!-- Background subtle radial glow -->
     <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-lime/10 blur-[130px] rounded-full pointer-events-none"></div>
 
+    <!-- Interactive Illuminated Dot Matrix Canvas (Reacts to Cursor) -->
+    <canvas id="hero-matrix-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-45 z-0" aria-hidden="true"></canvas>
+
     <div class="container-site relative z-10">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -601,6 +604,11 @@ POST /api/v1/auth/login
 
     </div>
   </div>
+
+  <!-- Global Cursor Spotlight & Custom Interactive Rings -->
+  <div class="cursor-spotlight" id="cursor-spotlight" aria-hidden="true"></div>
+  <div class="custom-cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" id="cursor-ring" aria-hidden="true"><span id="cursor-text"></span></div>
 
   <!-- Scripts -->
   <script src="data/portfolio-data.js"></script>

@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavigation();
   initModals();
   init3DPhotoCard();
+  initCursorEffects();
+  initHeroMatrixCanvas();
 });
 
 /* -------------------------------------------------------------
@@ -783,4 +785,204 @@ function init3DPhotoCard() {
   observer.observe(container);
 
   animFrameId = requestAnimationFrame(animate);
+}
+
+/* -------------------------------------------------------------
+ * 11. GLOBAL CURSOR LIGHT & INTERACTIVE SPRING CURSOR
+ * ------------------------------------------------------------- */
+function initCursorEffects() {
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!isFinePointer || prefersReducedMotion) return;
+
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  const text = document.getElementById('cursor-text');
+  const spotlight = document.getElementById('cursor-spotlight');
+
+  if (!dot || !ring) return;
+
+  document.documentElement.classList.add('has-custom-cursor');
+  document.body.classList.add('has-cursor');
+
+  let mouseX = -100;
+  let mouseY = -100;
+  let ringX = -100;
+  let ringY = -100;
+  let isVisible = false;
+
+  const lerp = (a, b, n) => a + (b - a) * n;
+
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!isVisible) {
+      isVisible = true;
+      dot.style.opacity = '1';
+      ring.style.opacity = '1';
+      if (spotlight) spotlight.style.opacity = '1';
+    }
+
+    // Direct update on dot
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+    // Update global spotlight CSS variables
+    document.body.style.setProperty('--cursor-x', `${mouseX}px`);
+    document.body.style.setProperty('--cursor-y', `${mouseY}px`);
+
+    // Detect clickable hover states
+    const target = e.target;
+    const clickable = target && target.closest('a, button, [role="button"], input, textarea, select, .tool-pill, .trace-step-btn');
+    const badge = target && target.closest('[data-cursor]');
+
+    if (badge) {
+      ring.classList.add('active-badge');
+      ring.classList.remove('active-hover');
+      if (text) text.textContent = badge.getAttribute('data-cursor') || 'VIEW';
+    } else if (clickable) {
+      ring.classList.add('active-hover');
+      ring.classList.remove('active-badge');
+      if (text) text.textContent = '';
+    } else {
+      ring.classList.remove('active-hover', 'active-badge');
+      if (text) text.textContent = '';
+    }
+
+    // Card spotlight coordinate updates
+    const card = target && target.closest('.case-card, .workshop-card');
+    if (card) {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--card-mouse-x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--card-mouse-y', `${e.clientY - rect.top}px`);
+    }
+  }, { passive: true });
+
+  document.addEventListener('pointerleave', () => {
+    isVisible = false;
+    dot.style.opacity = '0';
+    ring.style.opacity = '0';
+    if (spotlight) spotlight.style.opacity = '0';
+  });
+
+  // Smooth ring follow loop
+  function loop() {
+    if (isVisible) {
+      ringX = lerp(ringX, mouseX, 0.18);
+      ringY = lerp(ringY, mouseY, 0.18);
+      ring.style.transform = `translate3d(${ringX.toFixed(2)}px, ${ringY.toFixed(2)}px, 0) translate(-50%, -50%)`;
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+/* -------------------------------------------------------------
+ * 12. HERO INTERACTIVE ILLUMINATED DOT MATRIX CANVAS
+ * Exact blueprint grid that illuminates under the cursor
+ * ------------------------------------------------------------- */
+function initHeroMatrixCanvas() {
+  const canvas = document.getElementById('hero-matrix-canvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = 0;
+  let height = 0;
+  let pointer = { x: -1000, y: -1000, active: false };
+  let animId = null;
+  let isHeroVisible = true;
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const rect = canvas.getBoundingClientRect();
+    pointer.x = e.clientX - rect.left;
+    pointer.y = e.clientY - rect.top;
+    pointer.active = true;
+  }, { passive: true });
+
+  document.documentElement.addEventListener('pointerleave', () => {
+    pointer.active = false;
+  });
+
+  const spacing = 32;
+  const radius = 175;
+
+  function draw(time) {
+    if (!isHeroVisible) {
+      animId = requestAnimationFrame(draw);
+      return;
+    }
+
+    ctx.clearRect(0, 0, width, height);
+
+    const cols = Math.floor(width / spacing) + 1;
+    const rows = Math.floor(height / spacing) + 1;
+    const offsetX = (width - (cols - 1) * spacing) / 2;
+    const offsetY = (height - (rows - 1) * spacing) / 2;
+
+    for (let r = 0; r < rows; r++) {
+      const y = offsetY + r * spacing;
+      for (let c = 0; c < cols; c++) {
+        const x = offsetX + c * spacing;
+
+        // Proximity calculation to cursor
+        const dx = x - pointer.x;
+        const dy = y - pointer.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const factor = Math.max(0, 1 - dist / radius);
+        const weight = factor * factor;
+
+        // Ambient sine wave pulsing
+        const wave = 0.5 + 0.5 * Math.sin(0.008 * x + 0.006 * y - 0.001 * time);
+
+        let size = 1.2 + 0.6 * wave + 2.2 * weight;
+
+        if (weight > 0.02) {
+          // Illuminated lime particle under cursor light
+          ctx.fillStyle = `rgba(200, 255, 46, ${Math.min(1, 0.25 + 0.75 * weight)})`;
+          ctx.fillRect(x - size / 2, y - size / 2, size, size);
+        } else {
+          // Ambient blueprint dot
+          ctx.fillStyle = `rgba(241, 237, 227, ${0.04 + 0.04 * wave})`;
+          ctx.fillRect(x - 0.6, y - 0.6, 1.2, 1.2);
+        }
+      }
+    }
+
+    // Soft radial spotlight centered at cursor
+    if (pointer.active && pointer.x >= 0 && pointer.x <= width && pointer.y >= 0 && pointer.y <= height) {
+      const grad = ctx.createRadialGradient(pointer.x, pointer.y, 0, pointer.x, pointer.y, radius * 1.2);
+      grad.addColorStop(0, 'rgba(200, 255, 46, 0.09)');
+      grad.addColorStop(1, 'rgba(200, 255, 46, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, width, height);
+    }
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    isHeroVisible = entries[0].isIntersecting;
+  }, { threshold: 0.05 });
+  observer.observe(canvas.parentElement);
+
+  animId = requestAnimationFrame(draw);
 }

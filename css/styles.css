@@ -516,3 +516,120 @@ body::before {
   color: var(--color-lime);
   pointer-events: none;
 }
+
+/* =============================================================
+   CURSOR LIGHT / SPOTLIGHT & CUSTOM SPRING CURSOR
+   ============================================================= */
+
+/* Global cursor torch / spotlight */
+.cursor-spotlight {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(
+    600px circle at var(--cursor-x, -1000px) var(--cursor-y, -1000px),
+    rgba(200, 255, 46, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: background;
+}
+
+body.has-cursor .cursor-spotlight {
+  opacity: 1;
+}
+
+/* Custom interactive cursor (hidden on touch devices) */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-lime);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.08s ease;
+}
+
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(200, 255, 46, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-ink);
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.22s ease,
+              border-color 0.22s ease,
+              opacity 0.2s ease;
+  will-change: transform, width, height;
+}
+
+.custom-cursor-ring.active-hover {
+  width: 52px;
+  height: 52px;
+  border-color: var(--color-lime);
+  background-color: rgba(200, 255, 46, 0.12);
+}
+
+.custom-cursor-ring.active-badge {
+  width: 76px;
+  height: 76px;
+  background-color: var(--color-lime);
+  border-color: var(--color-lime);
+  color: var(--color-ink);
+}
+
+/* Card interactive spotlight glow on hover */
+.case-card,
+.workshop-card {
+  position: relative;
+}
+
+.case-card::before,
+.workshop-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    380px circle at var(--card-mouse-x, -500px) var(--card-mouse-y, -500px),
+    rgba(200, 255, 46, 0.16),
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.case-card:hover::before,
+.workshop-card:hover::before {
+  opacity: 1;
+}
