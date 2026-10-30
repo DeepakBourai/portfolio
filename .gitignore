@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local cache & analysis scraper
+_analysis_cache/
+.DS_Store
+Thumbs.db
+
+# Raw root downloads (organized in assets/)
+1758464877542.jfif
+Deepak_Bourai_CV.pdf

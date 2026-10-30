@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deepak Bourai — Data Scientist & Analytics Engineer</title>
+  
+  <meta name="theme-color" content="#0b0c0a">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Deepak Bourai is a Data Scientist and Analytics Engineer specializing in Azure Data Factory, Databricks, Power BI, Python, and Machine Learning on live production data.">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0b0c0a',
+            'ink-2': '#121410',
+            'ink-3': '#181a15',
+            paper: '#f1ede3',
+            lime: '#c8ff2e',
+            muted: '#a19e93',
+            dim: '#6d6b63',
+            line: 'rgba(241, 237, 227, 0.09)',
+            'line-strong': 'rgba(241, 237, 227, 0.18)',
+          },
+          fontFamily: {
+            sans: ['Bricolage Grotesque', 'sans-serif'],
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-ink text-paper antialiased selection:bg-lime selection:text-ink">
+
+  <!-- =========================================================
+       NAVIGATION BAR
+       ========================================================= -->
+  <header class="site-nav">
+    <div class="container-site h-full flex items-center justify-between">
+      
+      <!-- Logo / Name -->
+      <a href="#top" class="flex items-center gap-2 text-paper text-sm font-semibold tracking-tight group">
+        <span class="text-lime font-mono">/</span>
+        <span data-bind="profile.handle">alex-morgan / dev</span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-7">
+        <a href="#profile" class="nav-link">Profile</a>
+        <a href="#toolkit" class="nav-link">Toolkit</a>
+        <a href="#workshop" class="nav-link">Workshop</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#approach" class="nav-link">Principles</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn-outline text-xs py-2 px-3.5 hidden sm:inline-flex">
+          Hire Me
+        </a>
+        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="btn-primary text-xs py-2 px-3.5" id="nav-resume-btn">
+          Résumé ↓
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- =========================================================
+       HERO SECTION (#top)
+       ========================================================= -->
+  <section id="top" class="relative isolate min-h-[92svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden border-b border-line">
+    
+    <!-- Background subtle radial glow -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-lime/10 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="container-site relative z-10">
+      
+      <!-- Top Kicker & Status -->
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <span class="label-mono text-dim" data-bind="profile.kicker">Fig. 01 // Software Engineer</span>
+        <div id="hero-status-pill" class="status-indicator">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Main Hybrid Headline -->
+      <h1 id="hero-headline" class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-paper mb-8 max-w-5xl leading-[1.08]">
+        I build <em class="serif-italic text-lime">digital experiences</em> that move people.
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg md:text-xl text-[#d5d2c8] max-w-2xl font-normal leading-relaxed mb-10" data-bind="profile.subtitle">
+        Full Stack Developer crafting performant, scalable and beautifully engineered web experiences — from database schema design to the pixel on screen.
+      </p>
+
+      <!-- CTA Buttons & Location -->
+      <div class="flex flex-wrap items-center gap-5">
+        <a href="#work" class="btn-primary py-3.5 px-6 text-sm">
+          Explore Selected Work ↓
+        </a>
+        <a href="#contact" class="btn-outline py-3.5 px-6 text-sm">
+          Get in Touch →
+        </a>
+        <div class="hidden lg:flex items-center gap-2 ml-4 text-xs font-mono text-dim">
+          <span>●</span>
+          <span data-bind="profile.location">San Francisco, CA / Remote</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 01: PROFILE (#profile)
+       ========================================================= -->
+  <section id="profile" class="section-spacing border-b border-line">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">01</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Profile</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-12 max-w-3xl">
+        From schema to screen, <span class="serif-italic font-normal text-lime">end to end</span>.
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
+        <!-- Bio text -->
+        <div class="lg:col-span-7" id="profile-bio-container">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Facts Sidebar -->
+        <div class="lg:col-span-5 flex flex-col gap-3" id="profile-facts-grid">
+          <!-- Injected dynamically -->
+        </div>
+      </div>
+
+      <!-- Metrics / Numbers Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="profile-numbers-grid">
+        <!-- Injected dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 02: TOOLKIT (#toolkit)
+       ========================================================= -->
+  <section id="toolkit" class="section-spacing border-b border-line bg-ink-2/30">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">02</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Toolkit</span>
+        <span class="text-xs font-mono text-dim ml-auto hidden sm:inline">Tap or hover any skill to inspect</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-4 max-w-3xl">
+        A full stack, <span class="serif-italic font-normal text-lime">layer by layer</span>.
+      </h2>
+      <p class="text-muted text-base max-w-2xl mb-12">
+        Every tool has a specific purpose. Select any technology below to see its practical deployment and the systems it powers.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Layers and Technology Pills -->
+        <div class="lg:col-span-8 flex flex-col gap-6" id="toolkit-layers-container">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Right: Dynamic Tool Inspector Card (Sticky) -->
+        <div class="lg:col-span-4 sticky top-24">
+          <div class="p-6 md:p-8 rounded-2xl bg-ink-2 border border-line-strong shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-lime/10 blur-2xl rounded-full pointer-events-none"></div>
+
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-line">
+              <span class="label-mono text-dim">INSPECTOR</span>
+              <span class="label-mono px-2 py-0.5 rounded bg-lime/10 text-lime" id="tool-inspector-layer">LAYER</span>
+            </div>
+
+            <h4 class="text-2xl font-bold text-paper mb-3" id="tool-inspector-name">Select a Tool</h4>
+            
+            <p class="text-sm text-muted leading-relaxed mb-6" id="tool-inspector-use">
+              Select or hover any skill pill in the stack to review architectural context, responsibilities, and production implementation details.
+            </p>
+
+            <div id="tool-inspector-seenin">
+              <!-- Seen in badges -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 03: WORKSHOP (#workshop)
+       ========================================================= -->
+  <section id="workshop" class="section-spacing border-b border-line bg-ink-2">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">03</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Inside My Digital Workshop</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-4 max-w-3xl">
+        Follow a request <span class="serif-italic font-normal text-lime">through the stack</span>.
+      </h2>
+      <p class="text-muted text-base max-w-2xl mb-10">
+        Three journeys from real systems I've built. Select one, then play or step through it — inspect what actually travels between each architectural layer.
+      </p>
+
+      <!-- Journey Navigation Tabs -->
+      <div class="flex flex-wrap gap-2.5 mb-8" id="workshop-journeys-nav">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Workshop Simulator Box -->
+      <div class="workshop-card p-6 md:p-10 shadow-2xl">
+        
+        <!-- Active Journey Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-line">
+          <div class="text-sm font-mono text-paper font-semibold" id="workshop-journey-title">
+            <!-- Active journey title -->
+          </div>
+
+          <!-- Controls (Play / Prev / Next) -->
+          <div class="flex items-center gap-2">
+            <button type="button" class="btn-outline text-xs py-1.5 px-3 font-mono" id="workshop-prev-btn">
+              ◀ Prev
+            </button>
+            <button type="button" class="btn-primary text-xs py-1.5 px-4 font-mono" id="workshop-play-btn">
+              ▶ Play
+            </button>
+            <button type="button" class="btn-outline text-xs py-1.5 px-3 font-mono" id="workshop-next-btn">
+              Next ▶
+            </button>
+          </div>
+        </div>
+
+        <!-- Node Diagram Visualizer -->
+        <div class="mb-10 p-6 rounded-2xl bg-ink/80 border border-line">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4" id="workshop-nodes-container">
+            <!-- 5 Nodes injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Interactive Hop Inspector Window & Steps List -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Hop Terminal / Code Box -->
+          <div class="lg:col-span-7 p-6 rounded-2xl bg-ink border border-line-strong font-mono relative overflow-hidden">
+            <div class="flex items-center justify-between pb-3 mb-4 border-b border-line text-xs text-dim">
+              <span id="active-hop-tag" class="text-lime font-bold">HOP 01 / 07</span>
+              <span>PROTOCOL: HTTPS/WSS</span>
+            </div>
+            
+            <div class="text-xs text-dim mb-1">// Event Payload / Dispatch</div>
+            <pre class="text-xs md:text-sm text-lime bg-ink-2/80 p-3.5 rounded-lg border border-line overflow-x-auto mb-4 font-mono whitespace-pre-wrap" id="active-hop-code">
+POST /api/v1/auth/login
+            </pre>
+
+            <div class="text-xs text-dim mb-1">// Architectural Execution Note</div>
+            <p class="text-xs md:text-sm text-paper leading-relaxed font-sans" id="active-hop-detail">
+              Step details will appear here as you step through the workflow.
+            </p>
+          </div>
+
+          <!-- Steps List -->
+          <div class="lg:col-span-5 flex flex-col gap-2" id="workshop-steps-list">
+            <!-- Step buttons injected dynamically -->
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 04: WORK (#work)
+       ========================================================= -->
+  <section id="work" class="section-spacing border-b border-line">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">04</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Selected Work</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-4 max-w-3xl">
+        Production systems, <span class="serif-italic font-normal text-lime">shipped & running</span>.
+      </h2>
+      <p class="text-muted text-base max-w-2xl mb-14">
+        Deep dives into end-to-end architectures, engineering bottlenecks, and technical solutions built for scale.
+      </p>
+
+      <!-- Featured Projects List -->
+      <div id="featured-projects-container">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- More Builds Section -->
+      <div class="mt-20 pt-12 border-t border-line">
+        <div class="flex items-center gap-4 mb-8">
+          <span class="text-lime font-mono text-sm">+</span>
+          <span class="label-mono text-muted">More Builds & Client Work</span>
+          <span class="h-px flex-1 bg-line"></span>
+          <span class="text-xs font-mono text-dim hidden sm:inline">Live sites linked</span>
+        </div>
+
+        <ul class="space-y-1" id="more-builds-list">
+          <!-- Injected dynamically -->
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 05: EXPERIENCE & EDUCATION (#experience)
+       ========================================================= -->
+  <section id="experience" class="section-spacing border-b border-line bg-ink-2/30">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">05</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Experience</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-12 max-w-3xl">
+        Where I've been <span class="serif-italic font-normal text-lime">building</span>.
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Experience Timeline -->
+        <div class="lg:col-span-8" id="experience-timeline-container">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Education & Certifications Column -->
+        <div class="lg:col-span-4 flex flex-col gap-8">
+          
+          <div>
+            <span class="label-mono text-dim block mb-4">EDUCATION</span>
+            <div class="flex flex-col gap-4" id="education-container">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+          <div>
+            <span class="label-mono text-dim block mb-4">CERTIFICATIONS</span>
+            <div class="flex flex-col gap-4" id="certifications-container">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 06: PRINCIPLES (#approach)
+       ========================================================= -->
+  <section id="approach" class="section-spacing border-b border-line">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">06</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">How I Work</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-4 max-w-3xl">
+        Quiet engineering, <span class="serif-italic font-normal text-lime">that holds up</span>.
+      </h2>
+      <p class="text-muted text-base max-w-2xl mb-12">
+        The interesting work lives between the design file and the database. Most of what makes software feel resilient is invisible.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="principles-container">
+        <!-- Injected dynamically -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SECTION 07: CONTACT (#contact)
+       ========================================================= -->
+  <section id="contact" class="section-spacing relative overflow-hidden">
+    <div class="container-site">
+      
+      <!-- Section Header -->
+      <div class="flex items-center gap-3 mb-6">
+        <span class="font-mono text-lime font-bold text-sm">07</span>
+        <span class="h-3 w-px bg-line-strong"></span>
+        <span class="label-mono text-dim">Contact</span>
+      </div>
+
+      <h2 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-paper mb-6 max-w-3xl">
+        Let's build <span class="serif-italic font-normal text-lime">something real</span>.
+      </h2>
+      <p class="text-muted text-lg max-w-2xl mb-12">
+        Hiring for a full stack engineering role, or need someone to take a complex product from concept to production? I'd love to hear from you.
+      </p>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
+        
+        <!-- Primary Email Card -->
+        <div class="lg:col-span-7 p-8 rounded-2xl bg-ink-2 border border-line-strong">
+          <span class="label-mono text-dim block mb-3">DIRECT INQUIRIES</span>
+          
+          <div class="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-paper mb-6 break-all" id="contact-email-text">
+            alex.morgan.dev@example.com
+          </div>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <button type="button" class="btn-primary" id="copy-email-btn">
+              <span>📋</span> Copy Email Address
+            </button>
+            <a href="mailto:alex.morgan.dev@example.com" class="btn-outline direct-mail-link">
+              <span>✉</span> Compose Mail ↗
+            </a>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-line flex items-center gap-4 text-xs font-mono text-dim">
+            <span>PHONE:</span>
+            <a href="tel:+15552345678" class="text-paper contact-phone-link hover:text-lime transition-colors">+1 (555) 234-5678</a>
+          </div>
+        </div>
+
+        <!-- Social Networks List -->
+        <div class="lg:col-span-5 flex flex-col gap-3" id="contact-socials-list">
+          <!-- Injected dynamically -->
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+  <footer class="border-t border-line py-12 bg-ink text-xs font-mono text-dim">
+    <div class="container-site flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <span class="text-paper font-semibold" data-bind="profile.name">Alex Morgan</span>
+        <span>·</span>
+        <span data-bind="profile.role">Full Stack Engineer</span>
+        <span>·</span>
+        <span data-bind="profile.location">San Francisco, CA</span>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <span>Tailwind · Modern ES6 · Motion</span>
+        <a href="#top" class="text-lime hover:underline">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================
+       CASE STUDY DETAIL MODAL DRAWER
+       ========================================================= -->
+  <div id="case-study-modal" class="modal-backdrop">
+    <div class="modal-container">
+      
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-6 mb-6 border-b border-line">
+        <div>
+          <span class="label-mono text-lime block mb-1" id="modal-project-category">01 // HEALTHCARE</span>
+          <h3 class="text-3xl font-bold text-paper" id="modal-project-title">Project Name</h3>
+        </div>
+        <button type="button" class="btn-outline text-xs py-1.5 px-3 font-mono" id="modal-close-btn">
+          ✕ Close
+        </button>
+      </div>
+
+      <!-- Context -->
+      <div class="mb-8">
+        <h4 class="label-mono text-dim mb-2">SYSTEM CONTEXT & CHALLENGE</h4>
+        <p class="text-base text-muted leading-relaxed" id="modal-project-context"></p>
+      </div>
+
+      <!-- What was built -->
+      <div class="mb-8">
+        <h4 class="label-mono text-dim mb-3">KEY DELIVERABLES & FEATURES BUILT</h4>
+        <ul class="space-y-2.5" id="modal-project-built"></ul>
+      </div>
+
+      <!-- Technical bottlenecks solved -->
+      <div class="mb-8">
+        <h4 class="label-mono text-dim mb-3">ARCHITECTURAL CHALLENGES & SOLUTIONS</h4>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="modal-project-challenges"></div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-6 border-t border-line flex items-center justify-between">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="modal-live-btn">
+          Visit Live System ↗
+        </a>
+        <button type="button" class="btn-outline text-xs" onclick="document.getElementById('case-study-modal').classList.remove('open'); document.body.style.overflow='';">
+          Done
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data/portfolio-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
