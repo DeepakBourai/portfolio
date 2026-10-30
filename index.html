@@ -88,36 +88,95 @@
 
     <div class="container-site relative z-10">
       
-      <!-- Top Kicker & Status -->
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <span class="label-mono text-dim" data-bind="profile.kicker">Fig. 01 // Software Engineer</span>
-        <div id="hero-status-pill" class="status-indicator">
-          <!-- Injected dynamically -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        
+        <!-- Left Column: Story & CTAs (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col justify-center">
+          
+          <!-- Top Kicker & Status -->
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <span class="label-mono text-dim" data-bind="profile.kicker">Fig. 01 // Data Scientist</span>
+            <div id="hero-status-pill" class="status-indicator">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+
+          <!-- Main Hybrid Headline -->
+          <h1 id="hero-headline" class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-paper mb-6 leading-[1.12]">
+            I turn raw data into <em class="serif-italic text-lime">intelligent systems</em> that drive decisions.
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="text-base sm:text-lg text-[#d5d2c8] max-w-xl font-normal leading-relaxed mb-8" data-bind="profile.subtitle">
+            Data Scientist with expertise building scalable ETL pipelines, automated data workflows, and predictive BI solutions on live production data.
+          </p>
+
+          <!-- CTA Buttons & Location -->
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#work" class="btn-primary py-3 px-6 text-sm">
+              Explore Selected Work ↓
+            </a>
+            <a href="#contact" class="btn-outline py-3 px-6 text-sm">
+              Get in Touch →
+            </a>
+            <div class="hidden sm:flex items-center gap-2 ml-2 text-xs font-mono text-dim">
+              <span>●</span>
+              <span data-bind="profile.location">Noida, India</span>
+            </div>
+          </div>
+
         </div>
-      </div>
 
-      <!-- Main Hybrid Headline -->
-      <h1 id="hero-headline" class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-paper mb-8 max-w-5xl leading-[1.08]">
-        I build <em class="serif-italic text-lime">digital experiences</em> that move people.
-      </h1>
+        <!-- Right Column: Interactive 3D Parallax Photo Card (5 cols) -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <div class="photo-3d-scene w-full max-w-[340px] sm:max-w-[360px]" id="photo-3d-container">
+            
+            <div class="photo-3d-card" id="interactive-photo-card">
+              
+              <!-- Back Plate with Dark Grid -->
+              <div class="photo-3d-plate">
+                <div class="photo-3d-grid"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-lime/10"></div>
+              </div>
 
-      <!-- Subtitle -->
-      <p class="text-lg md:text-xl text-[#d5d2c8] max-w-2xl font-normal leading-relaxed mb-10" data-bind="profile.subtitle">
-        Full Stack Developer crafting performant, scalable and beautifully engineered web experiences — from database schema design to the pixel on screen.
-      </p>
+              <!-- Corner Reticles (translateZ: 20px) -->
+              <div class="photo-3d-corners" aria-hidden="true">
+                <span class="photo-3d-corner top-left"></span>
+                <span class="photo-3d-corner top-right"></span>
+                <span class="photo-3d-corner bottom-left"></span>
+                <span class="photo-3d-corner bottom-right"></span>
+              </div>
 
-      <!-- CTA Buttons & Location -->
-      <div class="flex flex-wrap items-center gap-5">
-        <a href="#work" class="btn-primary py-3.5 px-6 text-sm">
-          Explore Selected Work ↓
-        </a>
-        <a href="#contact" class="btn-outline py-3.5 px-6 text-sm">
-          Get in Touch →
-        </a>
-        <div class="hidden lg:flex items-center gap-2 ml-4 text-xs font-mono text-dim">
-          <span>●</span>
-          <span data-bind="profile.location">San Francisco, CA / Remote</span>
+              <!-- Photo Subject (translateZ: 50px) -->
+              <div class="photo-3d-subject">
+                <img src="assets/deepak.jpg" alt="Deepak Bourai" id="hero-3d-photo" />
+                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
+              </div>
+
+              <!-- Specular Sheen (translateZ: 65px) -->
+              <div class="photo-3d-sheen" id="photo-3d-sheen" aria-hidden="true"></div>
+
+              <!-- Floating Top Coordinates Badge (translateZ: 75px) -->
+              <div class="photo-3d-badge-top" aria-hidden="true">
+                <span>28.5355° N, 77.3910° E</span>
+              </div>
+
+              <!-- Floating Bottom Status Badge (translateZ: 85px) -->
+              <div class="photo-3d-floating-badge" aria-hidden="true">
+                <div class="flex items-center gap-2.5">
+                  <span class="pulse-dot"></span>
+                  <div>
+                    <div class="text-xs font-bold font-mono text-paper" data-bind="profile.name">Deepak Bourai</div>
+                    <div class="text-[11px] font-mono text-lime" data-bind="profile.role">Data Scientist & Analytics Engineer</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
+
       </div>
 
     </div>

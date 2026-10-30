@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContact(profile);
   initNavigation();
   initModals();
+  init3DPhotoCard();
 });
 
 /* -------------------------------------------------------------
@@ -686,4 +687,100 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 3200);
+}
+
+/* -------------------------------------------------------------
+ * 10. 3D PHOTO CARD PARALLAX ENGINE
+ * Modeled on the 3D Plate & Subject in ankit-portfolio-data-ten
+ * ------------------------------------------------------------- */
+function init3DPhotoCard() {
+  const card = document.getElementById('interactive-photo-card');
+  const container = document.getElementById('photo-3d-container');
+  const sheen = document.getElementById('photo-3d-sheen');
+
+  if (!card || !container) return;
+
+  let currentRotateX = 0;
+  let currentRotateY = 0;
+  let currentTranslateY = 0;
+
+  let targetRotateX = 0;
+  let targetRotateY = 0;
+  let targetTranslateY = 0;
+
+  let isHovered = false;
+  let animFrameId = null;
+  let isVisible = true;
+
+  // LERP helper
+  const lerp = (start, end, factor) => start + (end - start) * factor;
+
+  // Track mouse on window & container
+  function handlePointerMove(e) {
+    const rect = card.getBoundingClientRect();
+    const cardCenterX = rect.left + rect.width / 2;
+    const cardCenterY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - cardCenterX) / (window.innerWidth * 0.4);
+    const deltaY = (e.clientY - cardCenterY) / (window.innerHeight * 0.4);
+
+    // Clamp rotation angles (-18 to +18 deg)
+    const clampedX = Math.max(-1, Math.min(1, deltaX));
+    const clampedY = Math.max(-1, Math.min(1, deltaY));
+
+    targetRotateY = clampedX * 18;
+    targetRotateX = -clampedY * 15;
+    targetTranslateY = isHovered ? -8 : 0;
+
+    // Update specular sheen position
+    if (sheen) {
+      const sheenX = ((e.clientX - rect.left) / rect.width) * 100;
+      const sheenY = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mouse-x', `${sheenX}%`);
+      card.style.setProperty('--mouse-y', `${sheenY}%`);
+    }
+  }
+
+  container.addEventListener('mouseenter', () => {
+    isHovered = true;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isHovered = false;
+  });
+
+  window.addEventListener('pointermove', handlePointerMove, { passive: true });
+
+  // Main 60fps Animation Loop
+  function animate(now) {
+    if (!isVisible) {
+      animFrameId = requestAnimationFrame(animate);
+      return;
+    }
+
+    if (!isHovered) {
+      // Autonomous harmonic 3D floating movement when idle
+      const t = now * 0.0015;
+      targetRotateX = Math.sin(t * 0.7) * 6;
+      targetRotateY = Math.cos(t * 0.5) * 8;
+      targetTranslateY = Math.sin(t * 1.1) * 7;
+    }
+
+    // Smooth linear interpolation (inertia damping)
+    currentRotateX = lerp(currentRotateX, targetRotateX, 0.08);
+    currentRotateY = lerp(currentRotateY, targetRotateY, 0.08);
+    currentTranslateY = lerp(currentTranslateY, targetTranslateY, 0.08);
+
+    card.style.transform = `rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) translateY(${currentTranslateY.toFixed(2)}px)`;
+
+    animFrameId = requestAnimationFrame(animate);
+  }
+
+  // IntersectionObserver to save GPU/CPU cycles when off-screen
+  const observer = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+  }, { threshold: 0.1 });
+  observer.observe(container);
+
+  animFrameId = requestAnimationFrame(animate);
 }

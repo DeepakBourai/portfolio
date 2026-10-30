@@ -394,3 +394,125 @@ body::before {
   border: 1px dashed var(--color-line-strong);
   border-radius: 1rem;
 }
+
+/* =============================================================
+   3D PHOTO CARD & PARALLAX ENGINE
+   Modeled directly on the 3D plate & subject in ankit-portfolio
+   ============================================================= */
+.photo-3d-scene {
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+}
+
+.photo-3d-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1.18;
+  border-radius: 24px;
+  transform-style: preserve-3d;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.photo-3d-plate {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #181b15 0%, #0d0f0c 100%);
+  border: 1px solid var(--color-line-strong);
+  overflow: hidden;
+  transform: translateZ(0px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(200, 255, 46, 0.06);
+}
+
+.photo-3d-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(200, 255, 46, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 255, 46, 0.06) 1px, transparent 1px);
+  background-size: 20px 20px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 85%);
+}
+
+.photo-3d-corners {
+  position: absolute;
+  inset: 12px;
+  pointer-events: none;
+  transform: translateZ(20px);
+}
+
+.photo-3d-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+}
+.photo-3d-corner.top-left { top: 0; left: 0; border-top: 2px solid var(--color-lime); border-left: 2px solid var(--color-lime); }
+.photo-3d-corner.top-right { top: 0; right: 0; border-top: 2px solid var(--color-lime); border-right: 2px solid var(--color-lime); }
+.photo-3d-corner.bottom-left { bottom: 0; left: 0; border-bottom: 2px solid var(--color-lime); border-left: 2px solid var(--color-lime); }
+.photo-3d-corner.bottom-right { bottom: 0; right: 0; border-bottom: 2px solid var(--color-lime); border-right: 2px solid var(--color-lime); }
+
+.photo-3d-subject {
+  position: absolute;
+  inset: 14px;
+  border-radius: 18px;
+  overflow: hidden;
+  transform: translateZ(50px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(241, 237, 227, 0.12);
+}
+
+.photo-3d-subject img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.05) brightness(0.97);
+  transition: transform 0.3s ease;
+}
+
+.photo-3d-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(200, 255, 46, 0.2), transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  transform: translateZ(65px);
+}
+
+.photo-3d-floating-badge {
+  position: absolute;
+  bottom: -16px;
+  left: -14px;
+  background: rgba(11, 12, 10, 0.88);
+  border: 1px solid rgba(200, 255, 46, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.65rem 1.15rem;
+  border-radius: 14px;
+  transform: translateZ(85px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+}
+
+.photo-3d-badge-top {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  background: rgba(18, 20, 16, 0.92);
+  border: 1px solid var(--color-line-strong);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  transform: translateZ(75px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-lime);
+  pointer-events: none;
+}
