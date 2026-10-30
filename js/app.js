@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   init3DPhotoCard();
   initCursorEffects();
   initHeroMatrixCanvas();
+  initMobileMenu();
 });
 
 /* -------------------------------------------------------------
@@ -386,11 +387,11 @@ function initProjects(projects, moreProjects) {
             </div>
 
             <!-- Actions -->
-            <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-line">
-              <button type="button" class="btn-primary open-case-study" data-slug="${proj.slug}">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4 border-t border-line w-full sm:w-auto">
+              <button type="button" class="btn-primary open-case-study w-full sm:w-auto text-center justify-center" data-slug="${proj.slug}">
                 Read Case Study & Architecture →
               </button>
-              <a href="${proj.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-outline">
+              <a href="${proj.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-outline w-full sm:w-auto text-center justify-center">
                 Visit Live Site ↗
               </a>
             </div>
@@ -753,6 +754,26 @@ function init3DPhotoCard() {
     isHovered = false;
   });
 
+  // Mobile touch drag interaction
+  container.addEventListener('touchstart', () => {
+    isHovered = true;
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      handlePointerMove({
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+        pointerType: 'touch'
+      });
+    }
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    isHovered = false;
+  }, { passive: true });
+
   window.addEventListener('pointermove', handlePointerMove, { passive: true });
 
   // Main 60fps Animation Loop
@@ -1057,4 +1078,51 @@ function initNavClock() {
 
   update();
   setInterval(update, 10000);
+}
+
+/* -------------------------------------------------------------
+ * 15. MOBILE NAVIGATION MENU DRAWER
+ * ------------------------------------------------------------- */
+function initMobileMenu() {
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  if (!btn || !menu) return;
+
+  let isOpen = false;
+
+  function toggle(open) {
+    isOpen = typeof open === 'boolean' ? open : !isOpen;
+    btn.setAttribute('aria-expanded', isOpen.toString());
+    if (isOpen) {
+      menu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      if (hamburgerIcon) hamburgerIcon.classList.add('hidden');
+      if (closeIcon) closeIcon.classList.remove('hidden');
+    } else {
+      menu.classList.remove('open');
+      document.body.style.overflow = '';
+      if (hamburgerIcon) hamburgerIcon.classList.remove('hidden');
+      if (closeIcon) closeIcon.classList.add('hidden');
+    }
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggle();
+  });
+
+  menu.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle(false);
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      toggle(false);
+    }
+  });
 }

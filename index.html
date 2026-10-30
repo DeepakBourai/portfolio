@@ -81,19 +81,86 @@
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
-      <!-- Action Button & Live Local Time Clock -->
-      <div class="flex items-center gap-4">
+      <!-- Action Button, Live Local Time Clock & Mobile Hamburger Toggle -->
+      <div class="flex items-center gap-3 sm:gap-4">
         <span class="label-mono hidden text-muted lg:inline text-xs" aria-label="Local time in Noida">
           Noida <span class="text-paper tabular-nums" id="nav-local-time">--:--</span> IST
         </span>
-        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="group inline-flex items-center gap-2 rounded-full bg-lime px-4 py-2 text-xs font-semibold text-ink transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_15px_rgba(200,255,46,0.2)]" id="nav-resume-btn">
+        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="group inline-flex items-center gap-2 rounded-full bg-lime px-3 sm:px-4 py-1.5 sm:py-2 text-xs font-semibold text-ink transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_15px_rgba(200,255,46,0.2)]" id="nav-resume-btn">
           <span>Résumé</span>
           <span>↓</span>
         </a>
+
+        <!-- Mobile Menu Button (Hamburger) -->
+        <button type="button" id="mobile-menu-btn" class="grid h-10 w-10 place-items-center rounded-full border border-line-strong text-paper md:hidden transition-colors hover:border-lime hover:text-lime" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
       </div>
 
     </div>
   </header>
+
+  <!-- =========================================================
+       MOBILE NAVIGATION DRAWER OVERLAY
+       ========================================================= -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 flex flex-col bg-ink pt-[var(--nav-h)] md:hidden pointer-events-none opacity-0 -translate-y-full transition-all duration-300" aria-modal="true" role="dialog">
+    <div class="container-site flex flex-col flex-1 justify-between py-6">
+      <ul class="flex flex-col gap-1 mt-4">
+        <li>
+          <a href="#profile" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Profile</span>
+            <span class="label-mono text-xs text-muted">01</span>
+          </a>
+        </li>
+        <li>
+          <a href="#toolkit" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Toolkit</span>
+            <span class="label-mono text-xs text-muted">02</span>
+          </a>
+        </li>
+        <li>
+          <a href="#workshop" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Workshop</span>
+            <span class="label-mono text-xs text-muted">03</span>
+          </a>
+        </li>
+        <li>
+          <a href="#work" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Selected Work</span>
+            <span class="label-mono text-xs text-muted">04</span>
+          </a>
+        </li>
+        <li>
+          <a href="#experience" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Experience</span>
+            <span class="label-mono text-xs text-muted">05</span>
+          </a>
+        </li>
+        <li>
+          <a href="#approach" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Approach</span>
+            <span class="label-mono text-xs text-muted">06</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="mobile-nav-link flex items-baseline justify-between py-3.5 border-b border-line text-2xl font-bold tracking-tight text-paper hover:text-lime transition-colors">
+            <span>Contact</span>
+            <span class="label-mono text-xs text-muted">07</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="label-mono flex items-center justify-between pt-6 border-t border-line text-muted text-xs">
+        <a href="mailto:deepakbourai@gmail.com" class="text-paper underline decoration-lime underline-offset-4">deepakbourai@gmail.com</a>
+        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="text-lime">Résumé ↓</a>
+      </div>
+    </div>
+  </div>
 
   <!-- =========================================================
        HERO SECTION (#top)
@@ -211,12 +278,12 @@
         </p>
 
         <!-- CTA Buttons & Scroll Indicator (col 12 / lg:col 6) -->
-        <div class="col-span-12 lg:col-span-6 flex flex-wrap items-center gap-4 lg:justify-end">
-          <a href="#work" class="group inline-flex items-center gap-3 rounded-full bg-lime px-7 py-4 font-semibold text-ink text-sm md:text-base transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_25px_rgba(200,255,46,0.3)]">
+        <div class="col-span-12 lg:col-span-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 lg:justify-end">
+          <a href="#work" class="group inline-flex items-center justify-center gap-3 rounded-full bg-lime px-7 py-4 font-semibold text-ink text-sm md:text-base transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_25px_rgba(200,255,46,0.3)]">
             <span>Explore selected work</span>
             <span class="group-hover:translate-y-0.5 transition-transform font-bold">↓</span>
           </a>
-          <a href="#contact" class="group inline-flex items-center gap-3 rounded-full border border-line-strong px-7 py-4 font-semibold text-paper text-sm md:text-base transition-colors hover:border-paper active:scale-95 bg-ink-2/80">
+          <a href="#contact" class="group inline-flex items-center justify-center gap-3 rounded-full border border-line-strong px-7 py-4 font-semibold text-paper text-sm md:text-base transition-colors hover:border-paper active:scale-95 bg-ink-2/80">
             <span>Contact me</span>
             <span class="group-hover:translate-x-0.5 transition-transform font-bold">→</span>
           </a>
@@ -296,8 +363,8 @@
           <!-- Injected dynamically -->
         </div>
 
-        <!-- Right: Dynamic Tool Inspector Card (Sticky) -->
-        <div class="lg:col-span-4 sticky top-24">
+        <!-- Right: Dynamic Tool Inspector Card (Sticky on desktop, relative on mobile) -->
+        <div class="col-span-12 lg:col-span-4 relative lg:sticky lg:top-24 mt-4 lg:mt-0">
           <div class="p-6 md:p-8 rounded-2xl bg-ink-2 border border-line-strong shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 w-24 h-24 bg-lime/10 blur-2xl rounded-full pointer-events-none"></div>
 
@@ -343,8 +410,8 @@
         Three journeys from real systems I've built. Select one, then play or step through it — inspect what actually travels between each architectural layer.
       </p>
 
-      <!-- Journey Navigation Tabs -->
-      <div class="flex flex-wrap gap-2.5 mb-8" id="workshop-journeys-nav">
+      <!-- Journey Navigation Tabs (Smooth swipe on mobile) -->
+      <div class="flex gap-2 sm:gap-2.5 mb-6 overflow-x-auto pb-2 no-scrollbar" id="workshop-journeys-nav">
         <!-- Injected dynamically -->
       </div>
 
@@ -555,21 +622,21 @@ POST /api/v1/auth/login
           <span class="label-mono text-dim block mb-3">DIRECT INQUIRIES</span>
           
           <div class="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-paper mb-6 break-all" id="contact-email-text">
-            alex.morgan.dev@example.com
+            deepakbourai@gmail.com
           </div>
 
-          <div class="flex flex-wrap items-center gap-4">
-            <button type="button" class="btn-primary" id="copy-email-btn">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <button type="button" class="btn-primary w-full sm:w-auto text-center justify-center" id="copy-email-btn">
               <span>📋</span> Copy Email Address
             </button>
-            <a href="mailto:alex.morgan.dev@example.com" class="btn-outline direct-mail-link">
+            <a href="mailto:deepakbourai@gmail.com" class="btn-outline direct-mail-link w-full sm:w-auto text-center justify-center">
               <span>✉</span> Compose Mail ↗
             </a>
           </div>
 
           <div class="mt-8 pt-6 border-t border-line flex items-center gap-4 text-xs font-mono text-dim">
             <span>PHONE:</span>
-            <a href="tel:+15552345678" class="text-paper contact-phone-link hover:text-lime transition-colors">+1 (555) 234-5678</a>
+            <a href="tel:+919015910374" class="text-paper contact-phone-link hover:text-lime transition-colors">+91 9015910374</a>
           </div>
         </div>
 
