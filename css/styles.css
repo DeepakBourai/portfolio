@@ -633,3 +633,122 @@ body.has-cursor .cursor-spotlight {
 .workshop-card:hover::before {
   opacity: 1;
 }
+
+/* =============================================================
+   DISPLAY HERO & ACCENTS
+   ============================================================= */
+.display-hero {
+  font-family: var(--font-sans);
+  font-size: clamp(2.6rem, min(7.5vw, 11vh), 7.25rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Radar pulse animation */
+.pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(0.95); opacity: 0; }
+}
+
+/* =============================================================
+   INTRO OVERLAY ANIMATION (First Load)
+   ============================================================= */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--color-ink);
+  display: grid;
+  place-items: center;
+  clip-path: inset(0 0 0 0);
+  animation: intro-out 0.85s cubic-bezier(0.77, 0, 0.175, 1) 1.25s forwards;
+  pointer-events: none;
+}
+
+.intro-inner {
+  width: min(94vw, 1240px);
+  padding: 1rem 1.25rem;
+  box-sizing: border-box;
+}
+
+.intro-name {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2.2rem, min(7.3vw, 11vh), 6.5rem);
+  letter-spacing: -0.045em;
+  line-height: 0.88;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  color: var(--color-paper);
+  text-transform: uppercase;
+  width: 100%;
+  overflow: hidden;
+}
+
+.intro-name span {
+  display: inline-block;
+  transform: translateY(105%);
+  animation: intro-letter 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  flex-shrink: 0;
+}
+
+.intro-meta {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.2vw, 0.875rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.intro-bar {
+  flex: 1;
+  height: 1px;
+  background: var(--color-line-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-lime);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: intro-bar 0.95s cubic-bezier(0.77, 0, 0.175, 1) 0.1s forwards;
+}
+
+@keyframes intro-letter {
+  to { transform: translateY(0); }
+}
+
+@keyframes intro-bar {
+  to { transform: scaleX(1); }
+}
+
+@keyframes intro-out {
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+    opacity: 0;
+  }
+}

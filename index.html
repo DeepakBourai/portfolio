@@ -43,6 +43,22 @@
 <body class="bg-ink text-paper antialiased selection:bg-lime selection:text-ink">
 
   <!-- =========================================================
+       FIRST-LOAD INTRO OVERLAY ANIMATION
+       ========================================================= -->
+  <div class="intro-overlay" id="intro-overlay" aria-hidden="true">
+    <div class="intro-inner">
+      <div class="intro-name" id="intro-letters-container">
+        <!-- Injected dynamically with staggered letter delays -->
+      </div>
+      <div class="intro-meta label-mono">
+        <span>Data Scientist & Analytics Engineer</span>
+        <span class="intro-bar"></span>
+        <span>Noida · IN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
        NAVIGATION BAR
        ========================================================= -->
   <header class="site-nav">
@@ -51,7 +67,7 @@
       <!-- Logo / Name -->
       <a href="#top" class="flex items-center gap-2 text-paper text-sm font-semibold tracking-tight group">
         <span class="text-lime font-mono">/</span>
-        <span data-bind="profile.handle">alex-morgan / dev</span>
+        <span data-bind="profile.handle">deepak-bourai / data</span>
       </a>
 
       <!-- Desktop Nav Links -->
@@ -61,17 +77,18 @@
         <a href="#workshop" class="nav-link">Workshop</a>
         <a href="#work" class="nav-link">Work</a>
         <a href="#experience" class="nav-link">Experience</a>
-        <a href="#approach" class="nav-link">Principles</a>
+        <a href="#approach" class="nav-link">Approach</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
-        <a href="#contact" class="btn-outline text-xs py-2 px-3.5 hidden sm:inline-flex">
-          Hire Me
-        </a>
-        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="btn-primary text-xs py-2 px-3.5" id="nav-resume-btn">
-          Résumé ↓
+      <!-- Action Button & Live Local Time Clock -->
+      <div class="flex items-center gap-4">
+        <span class="label-mono hidden text-muted lg:inline text-xs" aria-label="Local time in Noida">
+          Noida <span class="text-paper tabular-nums" id="nav-local-time">--:--</span> IST
+        </span>
+        <a href="assets/Deepak_Bourai_Resume.pdf" target="_blank" class="group inline-flex items-center gap-2 rounded-full bg-lime px-4 py-2 text-xs font-semibold text-ink transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_15px_rgba(200,255,46,0.2)]" id="nav-resume-btn">
+          <span>Résumé</span>
+          <span>↓</span>
         </a>
       </div>
 
@@ -81,65 +98,67 @@
   <!-- =========================================================
        HERO SECTION (#top)
        ========================================================= -->
-  <section id="top" class="relative isolate min-h-[92svh] flex flex-col justify-center pt-24 pb-16 overflow-hidden border-b border-line">
+  <section id="top" aria-labelledby="hero-title" class="relative isolate min-h-[100svh] overflow-hidden pt-[calc(var(--nav-h)+1.5rem)] pb-16 border-b border-line">
     
-    <!-- Background subtle radial glow -->
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[650px] h-[350px] bg-lime/10 blur-[130px] rounded-full pointer-events-none"></div>
+    <!-- Background Layers -->
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+      <!-- Interactive Illuminated Dot Matrix Canvas (Reacts to Cursor) -->
+      <canvas id="hero-matrix-canvas" class="absolute inset-0 w-full h-full opacity-45" aria-hidden="true"></canvas>
+      <!-- Background Ambient Glow -->
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_30%,transparent_0%,var(--color-ink)_75%)]"></div>
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent"></div>
+    </div>
 
-    <!-- Interactive Illuminated Dot Matrix Canvas (Reacts to Cursor) -->
-    <canvas id="hero-matrix-canvas" class="absolute inset-0 w-full h-full pointer-events-none opacity-45 z-0" aria-hidden="true"></canvas>
-
-    <div class="container-site relative z-10">
+    <div class="container-site relative">
       
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <!-- Top Status Row -->
+      <div class="label-mono flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line pb-4 text-muted mb-8 lg:mb-12">
+        <span class="text-paper text-xs sm:text-sm">
+          Deepak Bourai <span class="text-dim">—</span> Data Scientist & Analytics Engineer
+        </span>
+        <span class="hidden md:inline text-xs text-dim">
+          Azure Data Factory · Databricks · Power BI · PySpark · Python · SQL
+        </span>
+        <span class="flex items-center gap-2 text-paper text-xs">
+          <span class="relative flex h-2 w-2">
+            <span class="pulse-ring absolute inset-0 rounded-full bg-lime"></span>
+            <span class="relative h-2 w-2 rounded-full bg-lime"></span>
+          </span>
+          Open to opportunities
+        </span>
+      </div>
+
+      <!-- Main Hero Area: Headline and Floating 3D Card -->
+      <div class="relative grid grid-cols-12 gap-x-6">
         
-        <!-- Left Column: Story & CTAs (7 cols) -->
-        <div class="lg:col-span-7 flex flex-col justify-center">
-          
-          <!-- Top Kicker & Status -->
-          <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <span class="label-mono text-dim" data-bind="profile.kicker">Fig. 01 // Data Scientist</span>
-            <div id="hero-status-pill" class="status-indicator">
-              <!-- Injected dynamically -->
-            </div>
-          </div>
-
-          <!-- Main Hybrid Headline -->
-          <h1 id="hero-headline" class="text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-paper mb-6 leading-[1.12]">
-            I turn raw data into <em class="serif-italic text-lime">intelligent systems</em> that drive decisions.
+        <!-- Headline Block -->
+        <div class="relative z-10 col-span-12 lg:col-span-9">
+          <h1 class="display-hero uppercase text-paper max-w-4xl" id="hero-title">
+            <span class="block">I TURN RAW DATA</span>
+            <span class="block pl-[8vw] lg:pl-[14vw] my-1 sm:my-2">
+              <span class="serif-accent italic normal-case tracking-[-0.02em] text-lime text-[1.12em]">
+                into intelligent systems
+              </span>
+            </span>
+            <span class="block">THAT DRIVE</span>
+            <span class="block pl-[5vw] lg:pl-[8vw] mt-1 sm:mt-2">
+              DECISIONS<span class="text-lime">.</span>
+            </span>
           </h1>
-
-          <!-- Subtitle -->
-          <p class="text-base sm:text-lg text-[#d5d2c8] max-w-xl font-normal leading-relaxed mb-8" data-bind="profile.subtitle">
-            Data Scientist with expertise building scalable ETL pipelines, automated data workflows, and predictive BI solutions on live production data.
-          </p>
-
-          <!-- CTA Buttons & Location -->
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="#work" class="btn-primary py-3 px-6 text-sm">
-              Explore Selected Work ↓
-            </a>
-            <a href="#contact" class="btn-outline py-3 px-6 text-sm">
-              Get in Touch →
-            </a>
-            <div class="hidden sm:flex items-center gap-2 ml-2 text-xs font-mono text-dim">
-              <span>●</span>
-              <span data-bind="profile.location">Noida, India</span>
-            </div>
-          </div>
-
         </div>
 
-        <!-- Right Column: Interactive 3D Parallax Photo Card (5 cols) -->
-        <div class="lg:col-span-5 flex justify-center lg:justify-end">
-          <div class="photo-3d-scene w-full max-w-[340px] sm:max-w-[360px]" id="photo-3d-container">
+        <!-- 3D Parallax Photo Card (Floats right on desktop) -->
+        <div class="relative col-span-12 sm:col-span-8 sm:col-start-3 md:col-span-6 md:col-start-4 lg:absolute lg:right-0 lg:-top-6 lg:col-auto lg:w-[28%] xl:w-[27%] mt-10 lg:mt-0 z-20">
+          <figure class="relative m-0 select-none hero-photo-wrapper" id="photo-3d-container">
             
-            <div class="photo-3d-card" id="interactive-photo-card">
+            <!-- 3D Card with Tilt & Idle Floating -->
+            <div class="photo-3d-card hero-3d-card" id="interactive-photo-card">
               
-              <!-- Back Plate with Dark Grid -->
-              <div class="photo-3d-plate">
+              <!-- Backplate & Grid -->
+              <div class="photo-3d-plate hero-photo-plate">
                 <div class="photo-3d-grid"></div>
                 <div class="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-lime/10"></div>
+                <div class="absolute inset-0" style="background-image: radial-gradient(60% 50% at 50% 40%, rgba(200,255,46,0.18), transparent 70%);"></div>
               </div>
 
               <!-- Corner Reticles (translateZ: 20px) -->
@@ -151,33 +170,60 @@
               </div>
 
               <!-- Photo Subject (translateZ: 50px) -->
-              <div class="photo-3d-subject">
+              <div class="photo-3d-subject hero-photo-subject">
                 <img src="assets/deepak.jpg" alt="Deepak Bourai" id="hero-3d-photo" />
-                <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-ink/75 via-transparent to-transparent"></div>
               </div>
 
               <!-- Specular Sheen (translateZ: 65px) -->
               <div class="photo-3d-sheen" id="photo-3d-sheen" aria-hidden="true"></div>
 
-              <!-- Floating Top Coordinates Badge (translateZ: 75px) -->
-              <div class="photo-3d-badge-top" aria-hidden="true">
-                <span>28.5355° N, 77.3910° E</span>
-              </div>
-
-              <!-- Floating Bottom Status Badge (translateZ: 85px) -->
-              <div class="photo-3d-floating-badge" aria-hidden="true">
-                <div class="flex items-center gap-2.5">
-                  <span class="pulse-dot"></span>
-                  <div>
-                    <div class="text-xs font-bold font-mono text-paper" data-bind="profile.name">Deepak Bourai</div>
-                    <div class="text-[11px] font-mono text-lime" data-bind="profile.role">Data Scientist & Analytics Engineer</div>
-                  </div>
-                </div>
+              <!-- Floating Status Badge Bottom Left (translateZ: 85px) -->
+              <div class="photo-3d-floating-badge hero-photo-badge" aria-hidden="true">
+                <span class="label-mono block text-[10px] text-lime">Fig. 01</span>
+                <span class="mt-0.5 block text-sm font-semibold tracking-tight text-paper">Deepak Bourai</span>
+                <span class="label-mono block text-[9px] text-muted">Data Scientist & Analytics Engineer</span>
               </div>
 
             </div>
 
-          </div>
+            <!-- Figcaption Underneath Card -->
+            <figcaption class="label-mono mt-4 flex justify-between gap-4 text-dim text-xs">
+              <span>
+                <span class="hidden [@media(hover:hover)]:inline">Move your cursor</span>
+                <span class="[@media(hover:hover)]:hidden">Drag the photo</span>
+                · 3D
+              </span>
+              <span>28.5355° N, 77.3910° E</span>
+            </figcaption>
+
+          </figure>
+        </div>
+
+      </div>
+
+      <!-- Bottom Row: Subtitle & High-Contrast Buttons -->
+      <div class="mt-12 lg:mt-16 grid grid-cols-12 items-end gap-x-6 gap-y-8 pt-4">
+        
+        <!-- Subtitle (col 12 / lg:col 6) -->
+        <p class="col-span-12 lg:col-span-6 text-base md:text-lg text-[#d5d2c8] leading-relaxed max-w-[42ch]">
+          Data Scientist with expertise building scalable ETL pipelines, automated data workflows, and predictive BI solutions on live production data — from lakehouse architecture to executive dashboards.
+        </p>
+
+        <!-- CTA Buttons & Scroll Indicator (col 12 / lg:col 6) -->
+        <div class="col-span-12 lg:col-span-6 flex flex-wrap items-center gap-4 lg:justify-end">
+          <a href="#work" class="group inline-flex items-center gap-3 rounded-full bg-lime px-7 py-4 font-semibold text-ink text-sm md:text-base transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_25px_rgba(200,255,46,0.3)]">
+            <span>Explore selected work</span>
+            <span class="group-hover:translate-y-0.5 transition-transform font-bold">↓</span>
+          </a>
+          <a href="#contact" class="group inline-flex items-center gap-3 rounded-full border border-line-strong px-7 py-4 font-semibold text-paper text-sm md:text-base transition-colors hover:border-paper active:scale-95 bg-ink-2/80">
+            <span>Contact me</span>
+            <span class="group-hover:translate-x-0.5 transition-transform font-bold">→</span>
+          </a>
+          <a href="#profile" class="label-mono hidden xl:flex items-center gap-2 text-muted hover:text-lime text-xs transition-colors ml-4">
+            <span>Scroll</span>
+            <span>↓</span>
+          </a>
         </div>
 
       </div>

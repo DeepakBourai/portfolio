@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const { profile, toolkit, workshop, projects, moreProjects, experience, education, certifications, principles } = PORTFOLIO_DATA;
 
   // Initialize UI components
+  initIntroAnimation(profile);
+  initNavClock();
   initProfile(profile);
   initToolkit(toolkit);
   initWorkshop(workshop);
@@ -985,4 +987,74 @@ function initHeroMatrixCanvas() {
   observer.observe(canvas.parentElement);
 
   animId = requestAnimationFrame(draw);
+}
+
+/* -------------------------------------------------------------
+ * 13. INTRO OVERLAY ANIMATION
+ * Exact staggered letter reveal matching the original website
+ * ------------------------------------------------------------- */
+function initIntroAnimation(profile) {
+  const container = document.getElementById('intro-letters-container');
+  const overlay = document.getElementById('intro-overlay');
+  const inner = document.querySelector('.intro-inner');
+  if (!container || !overlay) return;
+
+  const fullName = (profile.name || "Deepak Bourai").toUpperCase();
+  const letters = fullName.split("");
+
+  container.innerHTML = letters.map((char, index) => {
+    if (char === " ") {
+      return `<span style="animation-delay: ${35 * index}ms; min-width: 0.28em;">&nbsp;</span>`;
+    }
+    return `<span style="animation-delay: ${35 * index}ms">${char}</span>`;
+  }).join('');
+
+  // Dynamic autofit: guarantees the full name fits with zero clipping on any screen
+  function fitText() {
+    if (!inner) return;
+    const availableWidth = inner.clientWidth - 16;
+    let currentFontSize = parseFloat(window.getComputedStyle(container).fontSize);
+    
+    // Scale down dynamically if needed until it fits cleanly with breathing room
+    let attempts = 0;
+    while (container.scrollWidth > availableWidth && currentFontSize > 18 && attempts < 40) {
+      currentFontSize -= 1.5;
+      container.style.fontSize = `${currentFontSize}px`;
+      attempts++;
+    }
+  }
+
+  fitText();
+  window.addEventListener('resize', fitText);
+
+  // Remove overlay after animation completes (2.25s)
+  setTimeout(() => {
+    overlay.style.display = 'none';
+  }, 2250);
+}
+
+/* -------------------------------------------------------------
+ * 14. NAVIGATION LIVE LOCAL TIME CLOCK (Noida, India)
+ * ------------------------------------------------------------- */
+function initNavClock() {
+  const timeEl = document.getElementById('nav-local-time');
+  if (!timeEl) return;
+
+  function update() {
+    try {
+      const now = new Date();
+      const formatter = new Intl.DateTimeFormat('en-GB', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Kolkata'
+      });
+      timeEl.textContent = formatter.format(now);
+    } catch (e) {
+      const now = new Date();
+      timeEl.textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    }
+  }
+
+  update();
+  setInterval(update, 10000);
 }
