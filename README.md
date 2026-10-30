@@ -1,81 +1,97 @@
-# Editorial Engineering Portfolio
+# Deepak Bourai — Data Scientist & Analytics Engineer
 
-A high-performance, dark-editorial engineering portfolio modeled directly after [ankit-portfolio-data-ten.vercel.app](https://ankit-portfolio-data-ten.vercel.app/).
-
-Designed with an aesthetic blend of modern typography, technical schematics, and interactive systems visualization.
-
----
-
-## ⚡ Quick Start / Preview
-
-You can preview the website immediately in two ways:
-
-### Option 1: Direct File Open (Zero Setup)
-Double-click [`index.html`](file:///c:/Users/work/Downloads/portfolio/index.html) in Windows File Explorer or open it in any modern browser (Chrome, Edge, Firefox, Brave).
-
-### Option 2: Python Local Server
-Run the included preview server:
-```powershell
-python serve.py
-```
-Then visit **`http://localhost:3000`** in your browser.
+> **Live Portfolio:** [https://deepakbourai.github.io/portfolio/](https://deepakbourai.github.io/portfolio/)  
+> **Location:** Noida, India | **Email:** [deepakbourai@gmail.com](mailto:deepakbourai@gmail.com) | **Phone:** +91 9015910374  
+> **Credentials:** Microsoft Certified: Azure AI Fundamentals (AI-900) · Microsoft Certified: Power BI Data Analyst Associate (PL-300)
 
 ---
 
-## 🎨 Architectural & Design Highlights
+## 👨‍💻 About Me
 
-Mirrored from the reference site:
+I am a **Data Scientist & Analytics Engineer** with experience building scalable end-to-end ETL pipelines, automating complex data workflows, and delivering high-impact BI solutions on live production data.
 
-1. **Editorial Typography System**
-   - **Serif Accent**: *Instrument Serif* italic headers for high-end editorial contrast.
-   - **Modern Sans**: *Bricolage Grotesque* for clean, legible body text and headings.
-   - **Technical Monospace**: *JetBrains Mono* for system kickers, layer badges (`L1`, `L2`), metrics, and payloads.
-
-2. **Design Palette & Texture**
-   - Deep Carbon Background: `#0b0c0a` (`--color-ink`)
-   - Dark Slate Surface: `#121410` (`--color-ink-2`)
-   - Warm Paper Typography: `#f1ede3` (`--color-paper`)
-   - Signature Neon Lime Accent: `#c8ff2e` (`--color-lime`)
-   - Fine Hairline Grid Lines: `rgba(241, 237, 227, 0.09)`
-   - Subtle procedural background grain overlay.
-
-3. **Core Interactive Sections**
-   - **Hero (`#top`)**: Hybrid serif/sans headline, live availability indicator with pulsing green beacon, and quick CTAs.
-   - **Profile (`#profile`)**: Engineering philosophy, background summary, quick facts grid, and production metric callouts.
-   - **Full-Stack Toolkit (`#toolkit`)**: Interactive 5-layer architectural stack (`L1 Client`, `L2 Real-time`, `L3 API & Server`, `L4 Data`, `L5 Ship`). Hovering or tapping any skill pill updates the live inspector panel with its concrete production use case and projects where it was applied.
-   - **Digital Workshop (`#workshop`)**: Interactive request tracer simulation! Lets visitors choose a real-world workflow (*Sign in with RBAC*, *Start a WebRTC consultation*, *Multi-provider API aggregation*) and step/play through hops with payload previews and node highlighting.
-   - **Selected Work (`#work`)**: Case studies with abstract architectural schematics, key highlights, challenges & solutions, plus interactive full-detail modal drawer and "More builds" directory.
-   - **Experience & Education (`#experience`)**: Career timeline with active status badges, impact bullet points, stack tags, education credentials, and certifications.
-   - **Engineering Principles (`#approach`)**: High-contrast paper cards detailing technical philosophies (*Schema first*, *APIs that fail politely*, *Performance is a feature*).
-   - **Contact (`#contact`)**: One-click email copy button with toast notification, phone link, and direct social links.
+I specialize in **Python (Pandas, PySpark), SQL, Azure Data Factory, Databricks, and Power BI** for data ingestion, transformation, and executive reporting. I have a track record of architecting robust data models and interactive dashboards that drive decision-making across inventory, invoicing, and supply chain domains. Additionally, I build and deploy machine learning solutions — including predictive demand forecasting, computer vision for footfall analysis, and Generative AI document automation — to complement enterprise analytics workflows.
 
 ---
 
-## 📁 File Structure
+## 🛠️ Technical Skills & Core Competencies
 
-```
-c:\Users\work\Downloads\portfolio\
-├── index.html               # Main website markup & semantic sections
-├── css\
-│   └── styles.css           # Design tokens, variables, typography, animations
-├── js\
-│   └── app.js               # Reactive UI engine, workshop tracer, modals, observer
-├── data\
-│   └── portfolio-data.js    # Single source of truth for all content & details
-├── serve.py                 # 1-click local Python preview server
-└── README.md                # Project documentation
-```
+* **Cloud Data & ETL Orchestration:** Azure Data Factory (ADF), Azure Databricks, Microsoft Fabric, Azure Blob Storage, Power Automate, Automated Cloud Triggers
+* **Data Processing & Big Data:** Python, PySpark, Pandas, NumPy, SQL (MySQL, T-SQL), SKU Normalization, Automated Pre-Deployment Reconciliation (99%+ Accuracy)
+* **BI & Visual Analytics:** Power BI Desktop, Advanced DAX Measures (Time Intelligence, Dynamic KPIs, Rolling Averages, YTD/MTD), Power Query (M), Star & Snowflake Schema Modeling
+* **Machine Learning & AI:** Scikit-learn, XGBoost, Predictive Demand Forecasting, Computer Vision (YOLO, OpenCV), Generative AI (OpenAI API, Prompt Engineering)
+* **Databases & Architecture:** Relational Database Design, Dimensional Modeling, Fact & Dimension Tables, Query Performance Tuning
 
 ---
 
-## 📄 Uploading Your Resume
+## 💼 Work Experience
 
-The entire website is dynamically driven by [`data/portfolio-data.js`](file:///c:/Users/work/Downloads/portfolio/data/portfolio-data.js).
+### **Data Scientist** — *VoiceBack Analytics Pvt. Ltd.*
+*Jun 2025 – Present | Remote*
 
-Once you upload your resume (PDF, Word, or text format), the following fields will be mapped automatically:
-- Your real Name, Title, and Bio
-- Your Contact info, Email, Phone, and Social Profiles
-- Your Technical Skills mapped across L1–L5 layers
-- Your Real Projects, Case Studies, and Architecture highlights
-- Your Actual Work Experience, Companies, Dates, and Achievements
-- Your Education and Certifications
+* **Cloud ETL Automation:** Developed and maintained scalable ETL pipelines using Azure Data Factory and Databricks to automate ingestion, transformation, and validation of large-scale live production datasets, reducing manual data handling by **~40%**.
+* **Data Processing & Reconciliation:** Cleaned and transformed inventory and invoice datasets with Python (Pandas, PySpark) — standardizing SKU records and running automated reconciliation checks to guarantee **99%+ production data accuracy**.
+* **Executive Power BI Dashboards:** Built interactive dashboards with advanced DAX calculations (time intelligence, rolling averages, YTD/MTD, dynamic KPIs), slashing report turnaround times by **30%**.
+* **Computer Vision Stream Analytics:** Built and deployed YOLO and OpenCV deep learning models on CCTV video feeds for customer footfall estimation and demographic classification with **~85% detection accuracy**.
+* **Generative AI Document Automation:** Designed a file classification pipeline with OpenAI APIs and prompt engineering to automatically filter invoice and sourcing files, cutting manual review time by **~35%**.
+* **Procurement Optimization:** Analyzed vendor cost trends and stock replenishment patterns, directly supporting a **15% improvement** in procurement planning accuracy.
+
+---
+
+### **Associate** — *Conduent India LLP*
+*Sep 2019 – Mar 2020 | Noida, India*
+
+* Executed complex SQL queries to maintain customer databases, optimize data retrieval speeds, and ensure reporting accuracy.
+* Automated reporting workflows and reduced report generation time by **30%** through improved query architecture and data processing scripts.
+* Mentored new team members on internal data workflows and onboarding procedures.
+
+---
+
+## 🚀 Key Featured Projects
+
+### 1. **Inventory & Sourcing Analytics Pipeline**
+*Azure Data Factory · Databricks · PySpark · Power BI · SQL*
+* End-to-end cloud pipeline automating invoice extraction, SKU normalization, and pre-deployment parity checks across live datasets.
+* Powers executive Power BI dashboards with real-time vendor cost tracking and inventory replenishment signals.
+
+### 2. **Demand Forecasting & Price Optimization**
+*Python · XGBoost · Scikit-learn · NumPy · Power BI*
+* Machine learning time-series regression pipeline forecasting consumer demand across FMCG product categories.
+* Features interactive scenario-testing sliders in Power BI enabling business leaders to evaluate projected sales under varied pricing tiers.
+
+### 3. **CCTV Footfall & Demographic AI Engine**
+*Python · YOLO · OpenCV · Deep Learning · SQL*
+* Computer vision system processing live retail camera streams to calculate visitor footfall volume, dwell times, and demographic distributions in real time with ~85% accuracy.
+
+### 4. **Electric Vehicle Market Analysis**
+*SQL · Power BI · Unsupervised Machine Learning*
+* Exploratory data analysis (EDA) and clustering models analyzing EV adoption trends, infrastructure density, and buyer segment patterns.
+
+### 5. **GenAI Invoice & Document Classifier**
+*OpenAI API · Python · Prompt Engineering*
+* Intelligent document processing pipeline extracting structured JSON metadata from unstructured invoices and routing files automatically.
+
+---
+
+## 📜 Certifications & Honors
+
+* **Microsoft Certified: Azure AI Fundamentals (AI-900)** — Microsoft
+* **Microsoft Certified: Power BI Data Analyst Associate (PL-300)** — Microsoft
+
+---
+
+## 🎓 Education
+
+* **M.Tech in Artificial Intelligence & Machine Learning** — *BITS Pilani* (2026 – 2028)
+* **PG Diploma in Big Data Analytics & Machine Learning** — *CDAC* (2024 – 2025)
+* **Master of Computer Applications (MCA)** — *Glocal School of Science and Technology* (2021 – 2023)
+* **Bachelor of Computer Applications (BCA)** — *Hierank Business School* (2016 – 2019)
+
+---
+
+## 🌐 Connect & Portfolio
+
+* **Live Portfolio Website:** [https://deepakbourai.github.io/portfolio/](https://deepakbourai.github.io/portfolio/)
+* **LinkedIn:** [linkedin.com/in/deepak-bourai](https://www.linkedin.com/in/deepak-bourai)
+* **Email:** [deepakbourai@gmail.com](mailto:deepakbourai@gmail.com)
+* **Phone:** +91 9015910374
