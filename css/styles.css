@@ -238,15 +238,19 @@ body::before {
 /* Toolkit Component */
 .tool-pill {
   font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  padding: 0.45rem 0.95rem;
-  border-radius: 9999px;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 6px;
   background: var(--color-ink-2);
   border: 1px solid var(--color-line);
   color: var(--color-paper);
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
+  white-space: nowrap;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
 }
 
 .tool-pill:hover, .tool-pill.active {
@@ -254,6 +258,31 @@ body::before {
   background: rgba(200, 255, 46, 0.08);
   color: var(--color-lime);
   transform: translateY(-1px);
+}
+
+/* On mobile, allow pill text to wrap for long names but keep consistent shape */
+@media (max-width: 640px) {
+  .tool-pill {
+    font-size: 0.6875rem;
+    padding: 0.35rem 0.7rem;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    border-radius: 6px;
+    line-height: 1.35;
+    max-width: calc(50% - 0.5rem);
+  }
+}
+
+/* Toolkit layer card: ensure pills flow in a tight grid on mobile */
+.toolkit-layer-card .flex.flex-wrap {
+  gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .toolkit-layer-card .flex.flex-wrap {
+    gap: 0.4rem;
+  }
 }
 
 /* Interactive Workshop Simulator */

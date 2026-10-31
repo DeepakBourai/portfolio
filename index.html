@@ -354,21 +354,37 @@
       </div>
 
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-4 max-w-3xl">
-        A full stack, <span class="serif-italic font-normal text-lime">layer by layer</span>.
+        Data toolkit, <span class="serif-italic font-normal text-lime">layer by layer</span>.
       </h2>
-      <p class="text-muted text-base max-w-2xl mb-12">
-        Every tool has a specific purpose. Select any technology below to see its practical deployment and the systems it powers.
+      <p class="text-muted text-base max-w-2xl mb-8 sm:mb-12">
+        Every tool has a specific purpose. Tap or hover any technology below to see its practical deployment and the systems it powers.
       </p>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- On mobile: Inspector card shown FIRST so taps get instant feedback -->
+      <div class="lg:hidden mb-6">
+        <div class="p-5 rounded-2xl bg-ink-2 border border-line-strong shadow-xl relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-20 h-20 bg-lime/10 blur-2xl rounded-full pointer-events-none"></div>
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-line">
+            <span class="label-mono text-dim text-xs">TOOL INSPECTOR</span>
+            <span class="label-mono px-2 py-0.5 rounded bg-lime/10 text-lime text-xs" id="tool-inspector-layer-mobile">LAYER</span>
+          </div>
+          <h4 class="text-xl font-bold text-paper mb-2" id="tool-inspector-name-mobile">Select a Tool</h4>
+          <p class="text-sm text-muted leading-relaxed mb-4" id="tool-inspector-use-mobile">
+            Tap any skill pill below to inspect it.
+          </p>
+          <div id="tool-inspector-seenin-mobile"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         
         <!-- Left: Layers and Technology Pills -->
         <div class="lg:col-span-8 flex flex-col gap-6" id="toolkit-layers-container">
           <!-- Injected dynamically -->
         </div>
 
-        <!-- Right: Dynamic Tool Inspector Card (Sticky on desktop, relative on mobile) -->
-        <div class="col-span-12 lg:col-span-4 relative lg:sticky lg:top-24 mt-4 lg:mt-0">
+        <!-- Right: Dynamic Tool Inspector Card (Sticky on desktop only, mobile version is above) -->
+        <div class="hidden lg:block col-span-12 lg:col-span-4 relative lg:sticky lg:top-24">
           <div class="p-6 md:p-8 rounded-2xl bg-ink-2 border border-line-strong shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 w-24 h-24 bg-lime/10 blur-2xl rounded-full pointer-events-none"></div>
 

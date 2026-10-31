@@ -110,7 +110,7 @@ function initProfile(profile) {
 }
 
 /* -------------------------------------------------------------
- * 2. FULL STACK TOOLKIT (Layer-by-layer Inspector)
+ * 2. DATA TOOLKIT (Layer-by-layer Inspector)
  * ------------------------------------------------------------- */
 function initToolkit(toolkit) {
   const layersContainer = document.getElementById('toolkit-layers-container');
@@ -119,23 +119,43 @@ function initToolkit(toolkit) {
   const inspectorUse = document.getElementById('tool-inspector-use');
   const inspectorSeenIn = document.getElementById('tool-inspector-seenin');
 
+  // Mobile inspector elements
+  const inspectorNameM = document.getElementById('tool-inspector-name-mobile');
+  const inspectorLayerM = document.getElementById('tool-inspector-layer-mobile');
+  const inspectorUseM = document.getElementById('tool-inspector-use-mobile');
+  const inspectorSeenInM = document.getElementById('tool-inspector-seenin-mobile');
+
   if (!layersContainer) return;
+
+  function seenInHTML(tool) {
+    if (tool.seenIn && tool.seenIn.length > 0) {
+      return `
+        <span class="label-mono text-dim block mb-2 text-xs">Seen in production builds:</span>
+        <div class="flex flex-wrap gap-2">
+          ${tool.seenIn.map(p => `<span class="px-2.5 py-1 text-xs font-mono rounded bg-lime/10 text-lime border border-lime/20">${p}</span>`).join('')}
+        </div>
+      `;
+    }
+    return '';
+  }
 
   function updateInspector(tool) {
     if (!tool) return;
+    // Desktop inspector
     if (inspectorName) inspectorName.textContent = tool.name;
     if (inspectorLayer) inspectorLayer.textContent = tool.layer.toUpperCase();
     if (inspectorUse) inspectorUse.textContent = tool.use;
-    if (inspectorSeenIn) {
-      if (tool.seenIn && tool.seenIn.length > 0) {
-        inspectorSeenIn.innerHTML = `
-          <span class="label-mono text-dim block mb-2">Seen in production builds:</span>
-          <div class="flex flex-wrap gap-2">
-            ${tool.seenIn.map(p => `<span class="px-2.5 py-1 text-xs font-mono rounded bg-lime/10 text-lime border border-lime/20">${p}</span>`).join('')}
-          </div>
-        `;
-      } else {
-        inspectorSeenIn.innerHTML = '';
+    if (inspectorSeenIn) inspectorSeenIn.innerHTML = seenInHTML(tool);
+    // Mobile inspector
+    if (inspectorNameM) inspectorNameM.textContent = tool.name;
+    if (inspectorLayerM) inspectorLayerM.textContent = tool.layer.toUpperCase();
+    if (inspectorUseM) inspectorUseM.textContent = tool.use;
+    if (inspectorSeenInM) inspectorSeenInM.innerHTML = seenInHTML(tool);
+    // Scroll mobile inspector into view smoothly on tap
+    if (inspectorNameM && window.innerWidth < 1024) {
+      const mobileCard = inspectorNameM.closest('.lg\\:hidden, .rounded-2xl');
+      if (mobileCard) {
+        mobileCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
   }
@@ -149,15 +169,15 @@ function initToolkit(toolkit) {
   layersContainer.innerHTML = toolkit.layers.map(layer => {
     const layerTools = toolkit.tools.filter(t => t.layer === layer.id);
     return `
-      <div class="p-6 md:p-8 rounded-2xl bg-ink-2 border border-line transition-all hover:border-line-strong">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 pb-4 border-b border-line">
-          <div class="flex items-center gap-3">
-            <span class="font-mono text-xs px-2 py-0.5 rounded bg-lime/10 text-lime font-semibold border border-lime/20">${layer.index}</span>
-            <h3 class="text-xl font-bold tracking-tight text-paper">${layer.title}</h3>
+      <div class="toolkit-layer-card p-5 sm:p-6 md:p-8 rounded-2xl bg-ink-2 border border-line transition-all hover:border-line-strong">
+        <div class="mb-4 pb-4 border-b border-line">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="font-mono text-xs px-2 py-0.5 rounded bg-lime/10 text-lime font-semibold border border-lime/20 flex-shrink-0">${layer.index}</span>
+            <h3 class="text-lg sm:text-xl font-bold tracking-tight text-paper leading-tight">${layer.title}</h3>
           </div>
-          <p class="text-xs md:text-sm text-dim font-mono">${layer.caption}</p>
+          <p class="text-xs sm:text-sm text-muted font-sans leading-relaxed ml-0 sm:ml-0">${layer.caption}</p>
         </div>
-        <div class="flex flex-wrap gap-2.5">
+        <div class="flex flex-wrap gap-2">
           ${layerTools.map((t, idx) => `
             <button type="button" class="tool-pill ${layer.index === 'L1' && idx === 0 ? 'active' : ''}" data-tool-name="${t.name}">
               ${t.name}

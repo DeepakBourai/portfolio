@@ -1,8 +1,8 @@
 /**
  * PORTFOLIO DATA CONFIGURATION
  * -------------------------------------------------------------
- * Custom profile configuration for Deepak Bourai.
- * Modeled directly on the editorial engineering style of Ankit Singh's portfolio.
+ * Deepak Bourai — Data Scientist & Analytics Engineer
+ * Portfolio configuration: profile, toolkit, workshop journeys, projects, experience.
  */
 
 const PORTFOLIO_DATA = {
