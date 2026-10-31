@@ -65,9 +65,13 @@
     <div class="container-site h-full flex items-center justify-between">
       
       <!-- Logo / Name -->
-      <a href="#top" class="flex items-center gap-2 text-paper text-sm font-semibold tracking-tight group">
-        <span class="text-lime font-mono">/</span>
-        <span data-bind="profile.handle">deepak-bourai / data</span>
+      <a href="#top" class="flex items-center gap-2.5 text-paper group" aria-label="Deepak Bourai - Home">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="36" height="36" rx="8" fill="none" stroke="#c8ff2e" stroke-width="1.5"/>
+          <text x="5" y="26" font-family="'Bricolage Grotesque', sans-serif" font-size="18" font-weight="800" fill="#c8ff2e" letter-spacing="-1">D</text>
+          <text x="20" y="26" font-family="'Bricolage Grotesque', sans-serif" font-size="18" font-weight="800" fill="#f1ede3" letter-spacing="-1">B</text>
+        </svg>
+        <span class="text-sm font-semibold tracking-tight hidden sm:inline group-hover:text-lime transition-colors" data-bind="profile.handle">deepak-bourai / data</span>
       </a>
 
       <!-- Desktop Nav Links -->
@@ -179,7 +183,7 @@
     <div class="container-site relative">
       
       <!-- Top Status Row -->
-      <div class="label-mono flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line pb-4 text-muted mb-8 lg:mb-12">
+      <div class="label-mono flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-line pb-4 text-muted mb-8 lg:mb-12 hero-status-bar" style="opacity:0;transform:translateY(16px)">
         <span class="text-paper text-xs sm:text-sm">
           Deepak Bourai <span class="text-dim">—</span> Data Scientist & Analytics Engineer
         </span>
@@ -200,15 +204,15 @@
         
         <!-- Headline Block -->
         <div class="relative z-10 col-span-12 lg:col-span-9">
-          <h1 class="display-hero uppercase text-paper max-w-4xl" id="hero-title">
-            <span class="block">I TURN RAW DATA</span>
-            <span class="block pl-[8vw] lg:pl-[14vw] my-1 sm:my-2">
-              <span class="serif-accent italic normal-case tracking-[-0.02em] text-lime text-[1.12em]">
+          <h1 class="display-hero uppercase text-paper max-w-4xl hero-headline-animated" id="hero-title">
+            <span class="hero-line block">I TURN RAW DATA</span>
+            <span class="hero-line block pl-[8vw] lg:pl-[14vw] my-1 sm:my-2">
+              <span class="serif-accent italic normal-case tracking-[-0.02em] text-lime text-[1.12em] hero-line-italic">
                 into intelligent systems
               </span>
             </span>
-            <span class="block">THAT DRIVE</span>
-            <span class="block pl-[5vw] lg:pl-[8vw] mt-1 sm:mt-2">
+            <span class="hero-line block">THAT DRIVE</span>
+            <span class="hero-line block pl-[5vw] lg:pl-[8vw] mt-1 sm:mt-2">
               DECISIONS<span class="text-lime">.</span>
             </span>
           </h1>
@@ -273,12 +277,12 @@
       <div class="mt-12 lg:mt-16 grid grid-cols-12 items-end gap-x-6 gap-y-8 pt-4">
         
         <!-- Subtitle (col 12 / lg:col 6) -->
-        <p class="col-span-12 lg:col-span-6 text-base md:text-lg text-[#d5d2c8] leading-relaxed max-w-[42ch]">
+        <p class="col-span-12 lg:col-span-6 text-base md:text-lg text-[#d5d2c8] leading-relaxed max-w-[42ch] hero-subtitle">
           Data Scientist with expertise building scalable ETL pipelines, automated data workflows, and predictive BI solutions on live production data — from lakehouse architecture to executive dashboards.
         </p>
 
         <!-- CTA Buttons & Scroll Indicator (col 12 / lg:col 6) -->
-        <div class="col-span-12 lg:col-span-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 lg:justify-end">
+        <div class="col-span-12 lg:col-span-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 lg:justify-end hero-ctas">
           <a href="#work" class="group inline-flex items-center justify-center gap-3 rounded-full bg-lime px-7 py-4 font-semibold text-ink text-sm md:text-base transition-transform hover:-translate-y-0.5 active:scale-95 shadow-[0_0_25px_rgba(200,255,46,0.3)]">
             <span>Explore selected work</span>
             <span class="group-hover:translate-y-0.5 transition-transform font-bold">↓</span>
@@ -312,7 +316,7 @@
       </div>
 
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-paper mb-12 max-w-3xl">
-        From schema to screen, <span class="serif-italic font-normal text-lime">end to end</span>.
+        From raw data <span class="serif-italic font-normal text-lime">to decisions</span>, end to end.
       </h2>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-16">
@@ -571,7 +575,7 @@ POST /api/v1/auth/login
   <!-- =========================================================
        SECTION 06: PRINCIPLES (#approach)
        ========================================================= -->
-  <section id="approach" class="section-spacing border-b border-line">
+  <section id="approach" class="section-spacing border-b border-line on-paper">
     <div class="container-site">
       
       <!-- Section Header -->
@@ -612,7 +616,7 @@ POST /api/v1/auth/login
         Let's build <span class="serif-italic font-normal text-lime">something real</span>.
       </h2>
       <p class="text-muted text-lg max-w-2xl mb-12">
-        Hiring for a full stack engineering role, or need someone to take a complex product from concept to production? I'd love to hear from you.
+        Open to Data Science &amp; Analytics Engineering roles, or collaborating on a complex data pipeline or ML project? Let's talk.
       </p>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
@@ -656,11 +660,11 @@ POST /api/v1/auth/login
   <footer class="border-t border-line py-12 bg-ink text-xs font-mono text-dim">
     <div class="container-site flex flex-col md:flex-row items-center justify-between gap-4">
       <div>
-        <span class="text-paper font-semibold" data-bind="profile.name">Alex Morgan</span>
+        <span class="text-paper font-semibold">Deepak Bourai</span>
         <span>·</span>
-        <span data-bind="profile.role">Full Stack Engineer</span>
+        <span>Data Scientist &amp; Analytics Engineer</span>
         <span>·</span>
-        <span data-bind="profile.location">San Francisco, CA</span>
+        <span>Noida, India</span>
       </div>
 
       <div class="flex items-center gap-6">

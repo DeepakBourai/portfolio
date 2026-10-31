@@ -1,6 +1,6 @@
 /* ==========================================================================
    PORTFOLIO DESIGN SYSTEM & STYLES
-   Inspired by ankit-portfolio-data-ten.vercel.app
+   Deepak Bourai — Data Scientist & Analytics Engineer
    Editorial Engineering Aesthetic
    ========================================================================== */
 
@@ -397,7 +397,7 @@ body::before {
 
 /* =============================================================
    3D PHOTO CARD & PARALLAX ENGINE
-   Modeled directly on the 3D plate & subject in ankit-portfolio
+   Interactive 3D tilt with autonomous harmonic floating motion
    ============================================================= */
 .photo-3d-scene {
   perspective: 1200px;
@@ -821,4 +821,137 @@ body.has-cursor .cursor-spotlight {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+
+/* =============================================================
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
+   ============================================================= */
+
+/* Base hidden state */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Word slide for hero headline */
+.hero-word-outer {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.hero-word-inner {
+  display: inline-block;
+  transform: translateY(110%) rotate(4deg);
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left bottom;
+}
+
+.hero-word-inner.visible {
+  transform: translateY(0) rotate(0deg);
+}
+
+/* Hero status bar fade-in */
+.hero-status-bar {
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-status-bar.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Hero subtitle reveal */
+.hero-subtitle {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease 0.4s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+}
+
+.hero-subtitle.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero CTA buttons reveal */
+.hero-ctas {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease 0.6s, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s;
+}
+
+.hero-ctas.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Count-up number animation */
+.stat-number[data-count-target] {
+  transition: color 0.3s ease;
+}
+
+/* On-Paper section (approach) */
+.on-paper {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.on-paper .label-mono,
+.on-paper .text-dim,
+.on-paper .text-muted {
+  color: rgba(11, 12, 10, 0.5);
+}
+
+.on-paper h2,
+.on-paper h3,
+.on-paper p {
+  color: var(--color-ink);
+}
+
+.on-paper .font-mono,
+.on-paper .text-lime {
+  color: #4a7a00;
+}
+
+.on-paper .border-line {
+  border-color: rgba(11, 12, 10, 0.12);
+}
+
+.on-paper .border-line-strong {
+  border-color: rgba(11, 12, 10, 0.22);
+}
+
+.on-paper .bg-ink-2 {
+  background-color: rgba(11, 12, 10, 0.06);
+}
+
+/* Principles cards on light (on-paper) background */
+.on-paper #principles-container > div {
+  background-color: rgba(11, 12, 10, 0.05);
+  border-color: rgba(11, 12, 10, 0.12);
+}
+
+.on-paper #principles-container > div:hover {
+  background-color: rgba(11, 12, 10, 0.08);
+  border-color: rgba(11, 12, 10, 0.25);
+}
+
+.on-paper #principles-container p {
+  color: rgba(11, 12, 10, 0.65);
+}
+
+.on-paper #principles-container h3 {
+  color: var(--color-ink);
+}
+
+/* Section number in on-paper context */
+.on-paper .font-mono.text-lime {
+  color: #5a8a00;
 }

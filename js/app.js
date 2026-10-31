@@ -28,6 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initCursorEffects();
   initHeroMatrixCanvas();
   initMobileMenu();
+  // Scroll reveal runs last, after all dynamic content is injected
+  setTimeout(() => {
+    initScrollReveal();
+  }, 100);
+  initHeroAnimations();
+  initCountUp();
 });
 
 /* -------------------------------------------------------------
@@ -696,7 +702,7 @@ function showToast(message) {
 
 /* -------------------------------------------------------------
  * 10. 3D PHOTO CARD PARALLAX ENGINE
- * Modeled on the 3D Plate & Subject in ankit-portfolio-data-ten
+ * Interactive 3D tilt with autonomous harmonic floating motion
  * ------------------------------------------------------------- */
 function init3DPhotoCard() {
   const card = document.getElementById('interactive-photo-card');
@@ -1125,4 +1131,184 @@ function initMobileMenu() {
       toggle(false);
     }
   });
+}
+
+
+/* -------------------------------------------------------------
+ * 16. SCROLL-TRIGGERED REVEAL ANIMATIONS
+ * IntersectionObserver-based entrance animations for all sections
+ * ------------------------------------------------------------- */
+function initScrollReveal() {
+  // Add reveal-up class to section headers, h2s, cards
+  const revealTargets = [
+    '.section-spacing .flex.items-center.gap-3.mb-6', // section headers
+    '.section-spacing h2',                             // section headings
+    '.section-spacing p.text-muted',                   // subtitle text
+    '#profile-bio-container',
+    '#profile-facts-grid',
+    '#profile-numbers-grid > div',                     // stat cards
+    '#toolkit-layers-container > div',                  // toolkit layer cards
+    '#featured-projects-container .case-card',          // project cards
+    '#experience-timeline-container > div',             // experience items
+    '#education-container > div',                       // education items
+    '#certifications-container > div',                  // certification items
+    '#principles-container > div',                      // principle cards
+    '#contact .lg\\:col-span-7',
+    '#contact .lg\\:col-span-5',
+  ];
+
+  const allTargets = [];
+  revealTargets.forEach(selector => {
+    try {
+      document.querySelectorAll(selector).forEach(el => {
+        if (!el.classList.contains('reveal-up')) {
+          el.classList.add('reveal-up');
+          allTargets.push(el);
+        }
+      });
+    } catch(e) {}
+  });
+
+  // Also add stagger delays to list-style items
+  document.querySelectorAll('#profile-numbers-grid > div').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 80}ms`;
+  });
+  document.querySelectorAll('#principles-container > div').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 80}ms`;
+  });
+  document.querySelectorAll('#toolkit-layers-container > div').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 60}ms`;
+  });
+  document.querySelectorAll('#experience-timeline-container > div').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 80}ms`;
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  allTargets.forEach(el => observer.observe(el));
+}
+
+/* -------------------------------------------------------------
+ * 17. HERO WORD-SLIDE & STATUS BAR ENTRANCE ANIMATIONS
+ * Each word slides up from translateY(110%) rotate(4deg)
+ * ------------------------------------------------------------- */
+function initHeroAnimations() {
+  // Status bar fade in after intro overlay
+  const statusBar = document.querySelector('.hero-status-bar');
+  if (statusBar) {
+    setTimeout(() => {
+      statusBar.classList.add('visible');
+    }, 1400);
+  }
+
+  // Hero subtitle and CTAs
+  const subtitle = document.querySelector('.hero-subtitle');
+  const ctas = document.querySelector('.hero-ctas');
+  if (subtitle) setTimeout(() => subtitle.classList.add('visible'), 1600);
+  if (ctas) setTimeout(() => ctas.classList.add('visible'), 1800);
+
+  // Word-slide animation for hero headline lines
+  const heroTitle = document.getElementById('hero-title');
+  if (!heroTitle) return;
+
+  // For each .hero-line, wrap words in overflow-hidden + inner span
+  heroTitle.querySelectorAll('.hero-line').forEach((line, lineIndex) => {
+    // Get all child nodes — handle mixed text + element children
+    const children = Array.from(line.childNodes);
+    let newHTML = '';
+
+    children.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const words = node.textContent.split(/(\s+)/);
+        words.forEach(word => {
+          if (word.trim() === '') {
+            newHTML += word; // preserve spaces
+          } else {
+            const delay = lineIndex * 120 + 100;
+            newHTML += `<span class="hero-word-outer"><span class="hero-word-inner" style="transition-delay:${delay}ms">${word}</span></span>`;
+          }
+        });
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // It's an element like <span class="text-lime">.</span> or the italic span
+        const el = node;
+        if (el.classList.contains('hero-line-italic') || el.classList.contains('serif-accent')) {
+          // Wrap the whole italic element as one word
+          const delay = lineIndex * 120 + 100;
+          newHTML += `<span class="hero-word-outer"><span class="hero-word-inner" style="transition-delay:${delay}ms">${el.outerHTML}</span></span>`;
+        } else {
+          newHTML += el.outerHTML;
+        }
+      }
+    });
+
+    line.innerHTML = newHTML;
+  });
+
+  // Trigger the animation after intro overlay finishes (≈1.4s)
+  setTimeout(() => {
+    heroTitle.querySelectorAll('.hero-word-inner').forEach(el => {
+      el.classList.add('visible');
+    });
+  }, 1400);
+}
+
+/* -------------------------------------------------------------
+ * 18. COUNT-UP ANIMATION FOR PROFILE STAT NUMBERS
+ * Animates from 0 to target value when scrolled into view
+ * ------------------------------------------------------------- */
+function initCountUp() {
+  const numbersGrid = document.getElementById('profile-numbers-grid');
+  if (!numbersGrid) return;
+
+  // Parse value strings like "40%", "99%+", "30%", "85%"
+  function parseValue(str) {
+    const num = parseFloat(str.replace(/[^0-9.]/g, ''));
+    const suffix = str.replace(/[0-9.]/g, '');
+    return { num, suffix };
+  }
+
+  function animateCount(el, target, suffix, duration = 1200) {
+    const start = performance.now();
+    const from = 0;
+
+    function step(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(from + (target - from) * eased);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Find all lime-colored number divs
+        entry.target.querySelectorAll('.text-lime').forEach(el => {
+          const originalText = el.dataset.originalValue || el.textContent.trim();
+          if (!el.dataset.originalValue) {
+            el.dataset.originalValue = originalText;
+          }
+          const { num, suffix } = parseValue(originalText);
+          if (!isNaN(num) && num > 0) {
+            animateCount(el, num, suffix);
+          }
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(numbersGrid);
 }
